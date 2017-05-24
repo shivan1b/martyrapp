@@ -70,6 +70,8 @@ class ImBut(ButtonBehavior, Image):
             ''')
 
 
+btn_pressed = False
+
 class Martyr(App):
     '''
     Shows a martyr's picture on click of which about martyr is shown
@@ -84,9 +86,12 @@ class Martyr(App):
         return sm
 
     def callback(self, *args):
-        anim.start(self.imbut)
-        self.imbut.size_hint = None, None
-        anim.bind(on_complete=self.setscr)
+        if not btn_pressed:
+            anim.start(self.imbut)
+            self.imbut.size_hint = None, None
+            anim.bind(on_complete=self.setscr)
+        global btn_pressed
+        btn_pressed = True
 
     def setscr(self, *args):
         sm.add_widget(dscm)
