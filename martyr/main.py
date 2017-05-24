@@ -7,10 +7,13 @@ from kivy.uix.rst import RstDocument
 from kivy.factory import Factory
 from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
+from kivy.core.audio import SoundLoader,Sound
 
 
 with open('data/about.rst') as f:
 	desc = f.read()
+
+soundtrack = SoundLoader.load('data/fighter.mp3')
 
 sm = ScreenManager(transition=FadeTransition())
 
@@ -34,7 +37,8 @@ class DescMartyr(Screen):
             	RstDocument
             		id: lbl
         ''')
-
+    def on_pre_enter(self):
+        soundtrack.play()
 
 class PicScreen(Screen):
 	 Builder.load_string('''
